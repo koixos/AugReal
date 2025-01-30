@@ -162,14 +162,14 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.DefaultCompany.project1
+    Android: com.koixos.project1
     Standalone: com.DefaultCompany.project1
   buildNumber:
     Standalone: 0
     VisionOS: 0
     iPhone: 0
     tvOS: 0
-  overrideDefaultApplicationIdentifier: 0
+  overrideDefaultApplicationIdentifier: 1
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 24
   AndroidTargetSdkVersion: 0
@@ -853,7 +853,7 @@ PlayerSettings:
   cloudProjectId: 294c47f5-4d30-4395-87c3-991190d9157b
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: project1
+  projectName: HW1
   organizationId: koixos
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
