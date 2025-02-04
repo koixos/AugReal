@@ -9,10 +9,9 @@ public class PlaceObjectOnPlane : MonoBehaviour
 {
     [SerializeField]
     private GameObject prefab;
-
     private ARRaycastManager raycastManager;
     private ARPlaneManager planeManager;
-    private List<ARRaycastHit> hits = new List<ARRaycastHit>();
+    private readonly List<ARRaycastHit> hits = new();
     private Vector3 camPosition = Camera.main.transform.position;
 
     private void Awake()
