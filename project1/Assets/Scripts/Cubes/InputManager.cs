@@ -29,7 +29,6 @@ public class InputManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-
             Ray ray = Camera.ScreenPointToRay(Input.mousePosition);
             
             if (IsPointerOverUI(Input.mousePosition)) return;
@@ -42,7 +41,6 @@ public class InputManager : MonoBehaviour
                 {
                     SelectObject(clickedPrefab);
                 }
-
             }
             else
             {

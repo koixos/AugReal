@@ -6,8 +6,18 @@ public class PrefabSelectionUI : MonoBehaviour
     public FurnitureManager furnitureManager;
     public GameObject buttonPrefab;
     public Transform buttonContainer;
-    public ObjectSpawner spawner;
     public ScrollRect scrollRect;
+
+    private ARPlacementManager placementManager;
+
+    void Start()
+    {
+        GameObject xrOrigin = GameObject.Find("XR Origin");
+        if (xrOrigin != null)
+        {
+            placementManager = xrOrigin.GetComponent<ARPlacementManager>();
+        }
+    }
 
     public void PopulateUI(string category)
     {
@@ -39,7 +49,12 @@ public class PrefabSelectionUI : MonoBehaviour
                 buttonImg.raycastTarget = true;
             }
 
-            newButton.GetComponent<Button>().onClick.AddListener(() => spawner.SetSelectedPrefab(prefab));
+            GameObject prefabCopy = prefab;
+            newButton.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                placementManager.SetSelectedPrefab(prefabCopy);
+                placementManager.SpawnObject();
+            });
         }
 
         Canvas.ForceUpdateCanvases();
