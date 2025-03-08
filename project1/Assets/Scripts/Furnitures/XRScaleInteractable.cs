@@ -21,7 +21,6 @@ public class XRScaleInteractable : MonoBehaviour
             if (t0.phase == TouchPhase.Began || t1.phase == TouchPhase.Began)
             {
                 XRGrabInteractable interactable = GetComponent<XRGrabInteractable>();
-
                 if (interactable != null && interactable.isSelected)
                 {
                     initialTouchDist = Vector2.Distance(t0.position, t1.position);

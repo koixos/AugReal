@@ -15,12 +15,6 @@ public class ARInteractionManager : MonoBehaviour
         SetupARInteraction(cam);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void SetupARInteraction(Camera cam)
     {
         if (!cam.TryGetComponent<XRRayInteractor>(out _))
@@ -47,7 +41,7 @@ public class ARInteractionManager : MonoBehaviour
         if (obj.GetComponent<Collider>() == null)
         {
             BoxCollider collider = obj.AddComponent<BoxCollider>();
-            
+
             Renderer[] renderers = obj.GetComponentsInChildren<Renderer>();
             if (renderers.Length > 0)
             {
@@ -71,5 +65,29 @@ public class ARInteractionManager : MonoBehaviour
 
         obj.tag = "Furniture";
         return obj;
+    }
+
+    public void DeleteSelectedObject()
+    {
+        var interactionManager = FindObjectOfType<XRInteractionManager>();
+        if (interactionManager == null) return;
+
+        var interactors = FindObjectsOfType<XRBaseInteractor>();
+        foreach (var interactor in interactors)
+        {
+            if (interactor is XRRayInteractor rayInteractor)
+            {
+                if (rayInteractor.TryGetCurrent3DRaycastHit(out RaycastHit hit))
+                {
+                    GameObject hitObj = hit.collider.gameObject;
+                    XRGrabInteractable grabInteractable = hitObj.GetComponentInParent<XRGrabInteractable>();
+                    if (grabInteractable != null)
+                    {
+                        Destroy(grabInteractable.gameObject);
+                        return;
+                    }
+                }
+            }
+        }
     }
 }

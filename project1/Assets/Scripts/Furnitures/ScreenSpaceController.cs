@@ -3,12 +3,12 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class ScreenSpaceController : MonoBehaviour
 {
-    private XRController controller;
+    private ActionBasedController controller;
     private XRRayInteractor interactor;
 
     void Start()
     {
-        controller = GetComponent<XRController>();
+        controller = GetComponent<ActionBasedController>();
         interactor = GetComponent<XRRayInteractor>();
     }
 
@@ -22,11 +22,18 @@ public class ScreenSpaceController : MonoBehaviour
 
             if (touch.phase == TouchPhase.Began)
             {
-                controller.
+                if (controller != null && controller.selectAction != null)
+                {
+                    controller.selectAction.action.Enable();
+                   // controller.selectAction.action.started.Invoke(new UnityEngine.InputSystem.InputAction.CallbackContext());
+                }
             }
             else if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
             {
-                controller.
+                if (controller != null && controller.selectAction != null)
+                {
+                    //controller.selectAction.action.canceled.Invoke(new UnityEngine.InputSystem.InputAction.CallbackContext());
+                }
             }
         }        
     }
