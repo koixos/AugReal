@@ -14,7 +14,7 @@ public class InteractionManager : MonoBehaviour
 
     void Start()
     {
-        KillButton.onClick.AddListener(Kill);    
+        KillButton.onClick.AddListener(FindObjectOfType<ARInteractionManager>().DeleteSelectedObject);    
     }
 
     void Update()

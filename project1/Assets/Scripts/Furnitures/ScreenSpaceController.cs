@@ -1,15 +1,22 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class ScreenSpaceController : MonoBehaviour
 {
     private ActionBasedController controller;
     private XRRayInteractor interactor;
+    private bool isTouching = false;
 
     void Start()
     {
         controller = GetComponent<ActionBasedController>();
         interactor = GetComponent<XRRayInteractor>();
+
+        if (controller != null && controller.selectAction != null)
+        {
+            controller.selectAction.action.Enable();
+        }
     }
 
     void Update()
@@ -18,21 +25,20 @@ public class ScreenSpaceController : MonoBehaviour
         {
             Touch touch = Input.GetTouch(0);
 
-            interactor.TryGetCurrent3DRaycastHit(out _);
-
-            if (touch.phase == TouchPhase.Began)
+            if (touch.phase == UnityEngine.TouchPhase.Began && !isTouching)
             {
+                isTouching = true;
                 if (controller != null && controller.selectAction != null)
                 {
-                    controller.selectAction.action.Enable();
-                   // controller.selectAction.action.started.Invoke(new UnityEngine.InputSystem.InputAction.CallbackContext());
+                    controller.selectAction.action.started.Invoke(new InputAction.CallbackContext());
                 }
             }
-            else if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
+            else if ((touch.phase == UnityEngine.TouchPhase.Ended || touch.phase == UnityEngine.TouchPhase.Canceled) && isTouching)
             {
+                isTouching = false;
                 if (controller != null && controller.selectAction != null)
                 {
-                    //controller.selectAction.action.canceled.Invoke(new UnityEngine.InputSystem.InputAction.CallbackContext());
+                    controller.selectAction.action.canceled.Invoke(new InputAction.CallbackContext());
                 }
             }
         }        

@@ -21,7 +21,7 @@ public class UIManager : MonoBehaviour
 
     public void TogglePlanes(bool show)
     {
-        placementManager.TogglePlaneVisualization(show);
+        //placementManager.TogglePlaneVisualization(show);
     }
 
     public void SetupARInteraction(Camera cam)
